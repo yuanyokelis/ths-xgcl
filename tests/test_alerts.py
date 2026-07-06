@@ -24,7 +24,8 @@ def make_breakout_df():
 
 def test_detect_breakout_and_alerts():
     df = make_breakout_df()
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = yaml.safe_load(f)
     res = detect_alerts_for_df(df, params)
     # 触发突破确认或高分或风险之一
     assert isinstance(res, dict)
@@ -35,6 +36,7 @@ def test_detect_false_break():
     df = make_breakout_df()
     # 制作假突破：价格略高但量未放大
     df.loc[35:, 'volume'] = [1200]*5
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = yaml.safe_load(f)
     res = detect_alerts_for_df(df, params)
     assert 'alerts' in res
