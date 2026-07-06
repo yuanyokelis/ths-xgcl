@@ -22,7 +22,8 @@ def make_sample_df():
 
 
 def test_backtest_run():
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = yaml.safe_load(f)
     df = make_sample_df()
     engine = BacktestEngine(params=params)
     res = engine.run(df, symbol='TEST')
