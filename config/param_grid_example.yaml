@@ -1,0 +1,29 @@
+# 参数空间示例（用于网格/随机搜索）
+# 格式：
+# param_name:
+#   type: choice|int|float
+#   values: [a,b,c]    # type=choice
+#   min: 1             # type=int/float
+#   max: 10            # type=int/float
+#   step: 1            # 可选
+
+ma.MA_FAST:
+  type: int
+  min: 3
+  max: 7
+  step: 2
+ma.MA_MID:
+  type: int
+  min: 15
+  max: 25
+  step: 5
+backtest.POSITION_SIZE_PCT:
+  type: float
+  min: 0.05
+  max: 0.15
+  step: 0.05
+score.DEFAULT_THRESHOLD:
+  type: int
+  min: 70
+  max: 90
+  step: 10
