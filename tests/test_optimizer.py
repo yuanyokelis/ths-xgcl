@@ -1,7 +1,7 @@
 """
 自动参数优化单元测试（tests/test_optimizer.py）
 
-该测试使用一个非常小的参数空间与一个小样本目录运行优化器的 grid 和 random 模式，验证能否产生输出文件（trials.csv, best_params.yaml）并返回最佳参数记录。
+该测试使用一个非常小的参数空间与一个小样本目录运行优化器的 grid 和 random 模式，验证能否产生输出文件（trials.csv, best_params.yaml）并返回最佳参数。
 """
 from pathlib import Path
 import yaml
@@ -33,8 +33,10 @@ def make_dummy_stock():
 
 def test_optimizer_grid_and_random():
     p = make_dummy_stock()
-    param_space = yaml.safe_load(open('config/param_grid_example.yaml'))
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/param_grid_example.yaml', 'r', encoding='utf-8') as f:
+        param_space = yaml.safe_load(f)
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = yaml.safe_load(f)
     out = Path('tests/opt_out')
     if out.exists():
         shutil.rmtree(out)
