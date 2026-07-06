@@ -29,7 +29,8 @@ def make_dummy_stock_for_calib():
 
 def test_calibrator_runs_quick():
     p = make_dummy_stock_for_calib()
-    base_params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        base_params = yaml.safe_load(f)
     out = Path('tests/calib_out')
     if out.exists():
         shutil.rmtree(out)
