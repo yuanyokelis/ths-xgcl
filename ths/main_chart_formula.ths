@@ -1,0 +1,140 @@
+// 同花顺主图公式：THS Quant V5.0 主图源码
+// 文件名：ths/main_chart_formula.ths
+// 说明：本公式仅使用同花顺标准函数（MA, EMA, ATR, REF, HIGH, LOW, CLOSE, VOL）实现主要信号与主图绘制。
+// 对于同花顺专有函数（WINNER/COST/FINANCE），公式采用近似替代算法以保证兼容各版本同花顺。
+// 评分与信号依据 Parameter Engine 配置，默认参数写在注释顶部，所有参数均可在 Python 层配置并导出为公式参数常量。
+
+// ----------------------------- 参数区 -----------------------------
+MA_FAST:=5;
+MA_MID:=20;
+MA_SLOW:=60;
+MA_LONG:=120;
+ATR_PERIOD:=14;
+VOL_MA_SHORT:=5;
+VOL_MA_LONG:=20;
+BREAK_DAYS:=30;
+BREAK_VOLUME_MULT:=2.0;
+CHIP_DAYS:=60;
+SCORE_THRESHOLD:=80;
+
+// 颜色配置（可替换）
+COLOR_START:=COLORRED;      // 启动/吸筹
+COLOR_ACCUM:=COLORGREEN;    // 加仓
+COLOR_SHAKE:=COLORYELLOW;   // 洗盘
+COLOR_BREAK:=COLORBLUE;     // 突破
+COLOR_ADD:=COLORLIME;       // 加仓箭头
+COLOR_REDUCE:=COLORGRAY;    // 减仓箭头
+COLOR_TAKE:=COLORPURPLE;    // 止盈
+COLOR_STOP:=COLORBLACK;     // 止损
+
+// ----------------------------- 指标计算 -----------------------------
+C:=CLOSE;
+H:=HIGH;
+L:=LOW;
+O:=OPEN;
+V:=VOL; // 成交量
+T:=AMOUNT; // 成交额（同花顺环境存在）
+
+MA_F:=MA(C,MA_FAST);
+MA_M:=MA(C,MA_MID);
+MA_S:=MA(C,MA_SLOW);
+MA_L:=MA(C,MA_LONG);
+
+EMA_F:=EMA(C,MA_FAST);
+EMA_M:=EMA(C,MA_MID);
+
+ATR:=ATR(ATR_PERIOD);
+
+VOL_MA_S:=MA(V,VOL_MA_SHORT);
+VOL_MA_L:=MA(V,VOL_MA_LONG);
+
+// 量能斜率（简单差分近似）
+VolSlope:=VOL - REF(VOL,1);
+
+// 量能百分位（近似：过去N日中VOL相对位置）
+N:=60;
+RankCount:=SUM(V>REF(V,1),N);
+// 量价背离：价升量降或价跌量增
+PriceChange:=C-REF(C,1);
+VolChange:=V-REF(V,1);
+VolumePriceDiverge:= (PriceChange>0 AND VolChange<0) OR (PriceChange<0 AND VolChange>0);
+
+// 平台/箱体检测（近似）：过去BREAK_DAYS内最高最低振幅小于阈值
+RangeHigh:=HHV(H,BREAK_DAYS);
+RangeLow:=LLV(L,BREAK_DAYS);
+RangePct:=(RangeHigh-RangeLow)/RangeLow*100;
+PlatformThresh:=8; // 百分比阈值，可配置
+IsPlatform:=RangePct<=PlatformThresh;
+
+// 假突破：突破当天量能未放大到平均倍数
+TodayBreakVol:=V>REF(V,1)*BREAK_VOLUME_MULT;
+IsBreakout:=C>RangeHigh AND TodayBreakVol;
+IsFalseBreakout:=C>RangeHigh AND NOT TodayBreakVol;
+
+// 筹码近似：用换手与振幅估计锁定率（简化）
+TurnoverRate:=T/C*100; // 注意：若 AMOUNT/PRICE 不可用则需在兼容层处理
+ChipLockApprox:=SUM(TURNOVER>0.5,CHIP_DAYS)/CHIP_DAYS*100; // 假设 TURNOVER 字段存在
+
+// 趋势角度：均线差值近似角度
+AngleShort:= (MA_F - MA_M)/MA_M*100;
+AngleMid:= (MA_M - MA_S)/MA_S*100;
+
+// 趋势得分/量能得分等为主图显示辅助变量，具体评分在 Python 层实现并写回副图
+
+// ----------------------------- 信号定义 -----------------------------
+// 启动信号：短期均线上穿中期并且量能略有放大
+StartSignal:=CROSS(MA_F,MA_M) AND VOL>VOL_MA_S*0.8;
+
+// 吸筹信号：连续小量且价格处于均线上方（代表弱吸筹）
+SmallVolSeq:=SUM(V<VOL_MA_S,5)=5; // 连续5日缩量
+AccumulateSignal:=SmallVolSeq AND C>MA_M;
+
+// 洗盘信号：缩量下探后收复且影线较长
+ShakeSignal:= (L<REF(L,1) AND C>REF(C,1)) AND ( (H-C) / (H-L) > 0.6 ) AND V<VOL_MA_S;
+
+// 突破信号：突破箱体且成交量放大
+BreakSignal:=IsBreakout;
+
+// 加仓/减仓信号（基于趋势与量能）
+AddSignal:=C>MA_M AND VOL>VOL_MA_S*1.2 AND AngleShort>0.5;
+ReduceSignal:=C<MA_M AND VOL>VOL_MA_L*1.5;
+
+// 止盈止损示例
+TakeProfitSignal:=CROSS(C,MA_L*1.1); // 价格回撤到长期均线上方10%后回落交叉触发
+StopLossSignal:=CROSS(MA_M,MA_F); // 短期均线下穿中期均线
+
+// 主图绘制：使用 DRAWICON 绘制箭头（1 上箭头，2 下箭头，3 三角等）
+DRAWICON(StartSignal, L*0.995, 1);   // 启动：向上箭头
+DRAWICON(AccumulateSignal, L*0.99, 2); // 吸筹：小圆点
+DRAWICON(ShakeSignal, L*0.98, 3);     // 洗盘：黄色三角
+DRAWICON(BreakSignal, H*1.01, 1);     // 突破：上箭头
+DRAWICON(AddSignal, L*0.97, 4);       // 加仓：绿色箭头
+DRAWICON(ReduceSignal, H*0.99, 5);    // 减仓：灰色箭头
+DRAWICON(TakeProfitSignal, H*1.02, 6); // 止盈：紫色
+DRAWICON(StopLossSignal, L*0.95, 7);  // 止损：黑色
+
+// 主图颜色：根据趋势显示不同蜡烛颜色
+MA_Trend_Up:=MA_F>REF(MA_F,1) AND MA_M>REF(MA_M,1);
+MA_Trend_Down:=MA_F<REF(MA_F,1) AND MA_M<REF(MA_M,1);
+
+COLORSTICK(C>O AND MA_Trend_Up, COLORGREEN, COLORRED); // 上涨绿色
+COLORSTICK(C<O AND MA_Trend_Down, COLORRED, COLORGREEN); // 下跌红色
+
+// 同花顺公式对外输出：评分值与警示文本（用于副图或预警）
+// 由于同花顺内置文本输出受限，这里使用常规 PLOT 指标给出分数近似显示
+VolumeScore:=IF(V>VOL_MA_L, 15, IF(V>VOL_MA_S, 10, 5));
+TrendScore:=IF(AngleShort>0.8, 15, IF(AngleShort>0.2, 10, 5));
+ChipScore:=IF(ChipLockApprox>50, 12, IF(ChipLockApprox>30, 8, 4));
+MoneyScore:=IF(T>REF(T,1), 12, 6);
+BreakoutScore:=IF(BreakSignal, 10, IF(IsFalseBreakout, 2, 5));
+RiskScore:=IF(StopLossSignal, 0, 15);
+
+TotalScore:=VolumeScore+TrendScore+ChipScore+MoneyScore+BreakoutScore+RiskScore; // 0~?，在副图做比例换算
+
+PLOT(TotalScore, "总评分", COLORWHITE);
+
+// 标注阈值示例：当评分高于阈值绘制文本在主图上
+HIGH_SCORE_ALERT:=TotalScore>SCORE_THRESHOLD;
+DRAWTEXT(HIGH_SCORE_ALERT, H*1.05, "Score:"+FORMAT(TotalScore,1));
+
+// 兼容注：本公式避免直接调用 WINNER/COST/FINANCE 等专有函数，若你需要更精确的筹码/成本/主力信息，请在 Python 工具层调用 THS 导出数据或在同花顺至尊版环境下启用专有函数并使用相应版本的公式。
