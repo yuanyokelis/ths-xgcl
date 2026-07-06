@@ -25,7 +25,16 @@ def test_logger_basic(tmp_path):
         p = export_events_to_excel(out_path='logs/test_events.xlsx')
         assert Path(p).exists()
     finally:
-        # cleanup
+        # cleanup: 先移除并关闭 logger handlers，避免 Windows 文件锁导致 rmtree 失败
+        import logging
+        logger = logging.getLogger('ths_xgcl')
+        for h in list(logger.handlers):
+            try:
+                logger.removeHandler(h)
+                h.close()
+            except Exception:
+                pass
+        # 然后删除目录并恢复备份
         shutil.rmtree('logs')
         if backup:
             shutil.move(str(backup), 'logs')
