@@ -1,0 +1,10 @@
+# 开发测试依赖
+pytest
+pytest-cov
+pytest-html
+coverage
+pandas
+pyyaml
+numpy
+openpyxl
+matplotlib
