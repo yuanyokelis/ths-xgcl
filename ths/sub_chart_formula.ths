@@ -1,0 +1,50 @@
+// 同花顺副图公式：绘制各评分子项与总评分
+// 文件名：ths/sub_chart_formula.ths
+// 说明：副图显示成交量评分、趋势评分、筹码评分、资金评分、突破评分、风险评分与总评分的柱状或线图。
+
+// 参数区（与主图统一）
+MA_FAST:=5;
+MA_MID:=20;
+MA_SLOW:=60;
+MA_LONG:=120;
+ATR_PERIOD:=14;
+VOL_MA_SHORT:=5;
+VOL_MA_LONG:=20;
+BREAK_DAYS:=30;
+BREAK_VOLUME_MULT:=2.0;
+CHIP_DAYS:=60;
+SCORE_THRESHOLD:=80;
+
+C:=CLOSE;
+V:=VOL;
+T:=AMOUNT;
+
+// 复用主图计算的近似分数（与 Python 层保持一致的近似映射）
+VolumeScore:=IF(V>MA(V,VOL_MA_LONG), 25, IF(V>MA(V,VOL_MA_SHORT), 15, 5));
+AngleShort:=(MA(C,MA_FAST)-MA(C,MA_MID))/MA(C,MA_MID)*100;
+TrendScore:=IF(AngleShort>1,20,IF(AngleShort>0.3,12,5));
+ChipLockApprox:=SUM(T>0.5,CHIP_DAYS)/CHIP_DAYS*100;
+ChipScore:=IF(ChipLockApprox>60,15,IF(ChipLockApprox>30,10,5));
+MoneyScore:=IF(T>REF(T,1),15,8);
+
+// Breakout近似评分
+HH:=HHV(H,BREAK_DAYS);
+BreakScore:=IF(C>HH AND V>REF(V,1)*BREAK_VOLUME_MULT,10,IF(C>HH,4,0));
+
+// Risk近似扣分（转为评分）
+UpperShadow:=(H-C)/(H-L);
+HighVolTop:=(V>MA(V,VOL_MA_LONG)*2) AND (C/REF(C,20)>1.3);
+RiskScore:=IF(HighVolTop,0,IF(UpperShadow>0.6,5,15));
+
+TotalScore:=VolumeScore+TrendScore+ChipScore+MoneyScore+BreakScore+RiskScore;
+
+PLOT(VolumeScore, "成交量评分", COLORBLUE);
+PLOT(TrendScore, "趋势评分", COLORGREEN);
+PLOT(ChipScore, "筹码评分", COLORYELLOW);
+PLOT(MoneyScore, "资金评分", COLORPURPLE);
+PLOT(BreakScore, "突破评分", COLORLIME);
+PLOT(RiskScore, "风险评分", COLORRED);
+PLOT(TotalScore, "总评分", COLORWHITE);
+
+// 绘制阈值线
+PLOT(SCORE_THRESHOLD, "阈值", COLORGRAY);
