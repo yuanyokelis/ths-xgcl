@@ -1,0 +1,29 @@
+# 参数集中管理示例（YAML）
+# 所有核心参数在此集中定义，支持默认值与用户覆写
+
+parameters:
+  ma:
+    MA_FAST: 5
+    MA_MID: 20
+    MA_SLOW: 60
+    MA_LONG: 120
+  atr:
+    ATR_PERIOD: 14
+  volume:
+    VOL_MA_SHORT: 5
+    VOL_MA_LONG: 20
+    VOLUME_RATE_THRESHOLD: 1.5
+  breakout:
+    BREAK_DAYS: 30
+    BREAK_VOLUME_MULT: 2.0
+  chip:
+    CHIP_DAYS: 60
+  score:
+    DEFAULT_THRESHOLD: 80
+    WEIGHTS:
+      VOLUME: 0.25
+      TREND: 0.20
+      CHIP: 0.15
+      MONEY: 0.15
+      BREAKOUT: 0.10
+      RISK: 0.15

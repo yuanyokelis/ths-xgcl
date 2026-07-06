@@ -1,0 +1,22 @@
+# 忽略 Python 缓存与环境
+__pycache__/
+*.pyc
+venv/
+.env
+
+# 编辑器
+.vscode/
+.idea/
+
+# 数据与输出
+data/
+outputs/
+reports/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Distribution
+dist/
+build/
+*.egg-info/

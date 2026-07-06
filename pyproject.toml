@@ -1,0 +1,16 @@
+[project]
+name = "ths_xgcl"
+version = "0.1.0"
+description = "THS Quant V5.0 Enterprise - 第一卷：系统架构"
+requires-python = ">=3.10"
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+PyYAML = "^6.0"
+pandas = "^2.0"
+numpy = "^1.26"
+pytest = "^7.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
