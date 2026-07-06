@@ -1,5 +1,5 @@
 # 参数集中管理示例（YAML）
-# 所有核心参数在此集中定义，支持默认值与用户覆写
+# 已增加回测相关参数
 
 parameters:
   ma:
@@ -27,3 +27,9 @@ parameters:
       MONEY: 0.15
       BREAKOUT: 0.10
       RISK: 0.15
+  backtest:
+    INITIAL_CAPITAL: 100000.0
+    POSITION_SIZE_PCT: 0.1  # 每次开仓占总资金百分比
+    COMMISSION_PER_TRADE: 1.0  # 手续费（每笔固定）
+    SLIPPAGE_PCT: 0.001  # 交易滑点，按价格百分比
+    MIN_HOLD_DAYS: 1
