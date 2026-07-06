@@ -1,0 +1,18 @@
+# 校准输出占位（由 calibrator.py 生成）
+# 该文件为占位，实际校准结果会写入 config/parameters_calibrated.yaml
+# 文件示例结构：
+
+best:
+  id: 0
+  weights:
+    VOLUME: 0.2
+    TREND: 0.2
+    CHIP: 0.2
+    MONEY: 0.2
+    BREAKOUT: 0.1
+    RISK: 0.1
+  metrics:
+    annual_return: 0.123
+    max_drawdown: -0.12
+    sharpe: 0.8
+note: "自动生成的校准权重，未覆盖原始 parameters.yaml"
