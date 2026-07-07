@@ -32,7 +32,8 @@ def test_end_to_end(tmp_path):
     out_sel = tmp_path / 'out_sel'
     out_bt = tmp_path / 'out_bt'
     make_sample_stocks(data_dir)
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = yaml.safe_load(f)
     # 运行选股
     run_selection(data_dir, out_sel, params)
     assert (out_sel / 'selection_results.csv').exists()
