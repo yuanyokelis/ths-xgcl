@@ -24,7 +24,7 @@ from typing import Dict, Any, List
 import sys
 
 # Ensure repo root and python/ on path
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 PY_DIR = ROOT / 'python'
@@ -43,6 +43,8 @@ def load_params(path: Path) -> Dict[str, Any]:
 
 
 def save_yaml(path: Path, obj: Dict[str, Any]):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         yaml.safe_dump(obj, f, allow_unicode=True)
 

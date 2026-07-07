@@ -40,10 +40,10 @@ def test_selection_directory():
 
 
 def test_score_single():
-    f = make_sample('CCC')
+    csv_file = make_sample('CCC')
     import yaml as _yaml
-    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
-        params = _yaml.safe_load(f)
-    df = pd.read_csv(f)
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as pf:
+        params = _yaml.safe_load(pf)
+    df = pd.read_csv(csv_file)
     score = score_single(df, params)
     assert isinstance(score, float) or (score != score) == False

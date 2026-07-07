@@ -1,2 +1,2 @@
 id,weights,objective,metrics,time
-0,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 1.0}",86.06281280559254,"{""annual_return"": 0.07450601504133059, ""max_drawdown"": 0.0, ""sharpe"": 171.9766135811024}",0.06521940231323242
+0,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 1.0}",86.06281280559254,"{""annual_return"": 0.07450601504133059, ""max_drawdown"": 0.0, ""sharpe"": 171.9766135811024}",0.051401615142822266
