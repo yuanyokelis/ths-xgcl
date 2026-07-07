@@ -1,0 +1,4 @@
+id,params,objective,time,metrics
+0,"{""ma.MA_FAST"": 3, ""ma.MA_MID"": 21, ""backtest.POSITION_SIZE_PCT"": 0.1, ""score.DEFAULT_THRESHOLD"": 85}",-14998.5,0.006006479263305664,"{""annual_return"": -9999.0, ""max_drawdown"": 9999.0, ""sharpe"": 0.0}"
+1,"{""ma.MA_FAST"": 6, ""ma.MA_MID"": 21, ""backtest.POSITION_SIZE_PCT"": 0.15, ""score.DEFAULT_THRESHOLD"": 72}",-14998.5,0.005999088287353516,"{""annual_return"": -9999.0, ""max_drawdown"": 9999.0, ""sharpe"": 0.0}"
+2,"{""ma.MA_FAST"": 5, ""ma.MA_MID"": 21, ""backtest.POSITION_SIZE_PCT"": 0.1, ""score.DEFAULT_THRESHOLD"": 74}",-14998.5,0.0,"{""annual_return"": -9999.0, ""max_drawdown"": 9999.0, ""sharpe"": 0.0}"
