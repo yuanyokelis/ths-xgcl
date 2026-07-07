@@ -7,5 +7,5 @@ objective: -14998.5
 params:
   backtest.POSITION_SIZE_PCT: 0.1
   ma.MA_FAST: 3
-  ma.MA_MID: 21
-  score.DEFAULT_THRESHOLD: 89
+  ma.MA_MID: 16
+  score.DEFAULT_THRESHOLD: 86

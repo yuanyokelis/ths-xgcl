@@ -1,2 +1,22 @@
 id,weights,objective,metrics,time
-0,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 1.0}",86.06281280559254,"{""annual_return"": 0.07450601504133059, ""max_drawdown"": 0.0, ""sharpe"": 171.9766135811024}",0.051401615142822266
+0,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 1.0}",86.06281280559254,"{""annual_return"": 0.07450601504133059, ""max_drawdown"": 0.0, ""sharpe"": 171.9766135811024}",0.06450557708740234
+1,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.5, ""RISK"": 0.5}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.040380001068115234
+2,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 1.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.05912375450134277
+3,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.5, ""BREAKOUT"": 0.0, ""RISK"": 0.5}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.047408342361450195
+4,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.5, ""BREAKOUT"": 0.5, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.03643441200256348
+5,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 1.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.04831695556640625
+6,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.5, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.5}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.05661153793334961
+7,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.5, ""MONEY"": 0.0, ""BREAKOUT"": 0.5, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.035205841064453125
+8,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 0.5, ""MONEY"": 0.5, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.04986929893493652
+9,"{""VOLUME"": 0.0, ""TREND"": 0.0, ""CHIP"": 1.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.05802774429321289
+10,"{""VOLUME"": 0.0, ""TREND"": 0.5, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.5}",9.00807888287901,"{""annual_return"": 0.06458172289729203, ""max_drawdown"": 0.0, ""sharpe"": 17.886994319963435}",0.047284603118896484
+11,"{""VOLUME"": 0.0, ""TREND"": 0.5, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.5, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.03602027893066406
+12,"{""VOLUME"": 0.0, ""TREND"": 0.5, ""CHIP"": 0.0, ""MONEY"": 0.5, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",9.00807888287901,"{""annual_return"": 0.06458172289729203, ""max_drawdown"": 0.0, ""sharpe"": 17.886994319963435}",0.05949711799621582
+13,"{""VOLUME"": 0.0, ""TREND"": 0.5, ""CHIP"": 0.5, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.04530644416809082
+14,"{""VOLUME"": 0.0, ""TREND"": 1.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",9.00807888287901,"{""annual_return"": 0.06458172289729203, ""max_drawdown"": 0.0, ""sharpe"": 17.886994319963435}",0.0473482608795166
+15,"{""VOLUME"": 0.5, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.5}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.04523873329162598
+16,"{""VOLUME"": 0.5, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.5, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.037274837493896484
+17,"{""VOLUME"": 0.5, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.5, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.04771852493286133
+18,"{""VOLUME"": 0.5, ""TREND"": 0.0, ""CHIP"": 0.5, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.049455881118774414
+19,"{""VOLUME"": 0.5, ""TREND"": 0.5, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.045900821685791016
+20,"{""VOLUME"": 1.0, ""TREND"": 0.0, ""CHIP"": 0.0, ""MONEY"": 0.0, ""BREAKOUT"": 0.0, ""RISK"": 0.0}",0.0,"{""annual_return"": 0.0, ""max_drawdown"": 0.0, ""sharpe"": 0.0}",0.03215456008911133
