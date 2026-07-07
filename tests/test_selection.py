@@ -31,15 +31,19 @@ def test_selection_directory():
     f2 = make_sample('BBB')
     params = None
     out = Path('tests/tmp_out')
-    res = run_directory(p, out, params=__import__('yaml').safe_load(open('config/parameters.yaml')))
+    import yaml as _yaml
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = _yaml.safe_load(f)
+    res = run_directory(p, out, params=params)
     assert 'symbol' in res.columns
     assert len(res)>0
 
 
 def test_score_single():
     f = make_sample('CCC')
-    import yaml
-    params = yaml.safe_load(open('config/parameters.yaml'))
+    import yaml as _yaml
+    with open('config/parameters.yaml', 'r', encoding='utf-8') as f:
+        params = _yaml.safe_load(f)
     df = pd.read_csv(f)
     score = score_single(df, params)
     assert isinstance(score, float) or (score != score) == False
